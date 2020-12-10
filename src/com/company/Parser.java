@@ -28,15 +28,35 @@ public final class Parser {
 
         Line line;
         if (isNum(left) && isNum(right)) {
-            line = new Line(Integer.valueOf(left), sim, Integer.valueOf(right));
+            try {
+                int leftInt = Integer.valueOf(left);
+                int rightInt = Integer.valueOf(right);
+                if (leftInt >= 0 && rightInt >= 0 && leftInt <= 10 && rightInt <= 10)
+                    line = new Line(leftInt, sim, rightInt);
+                else
+                    throw new IllegalStateException("Number is not included in the range: " + leftInt + " " + rightInt);
+            }
+            catch (Exception ex) {
+                throw new IllegalStateException(ex.getMessage());
+
+            }
         } else {
-            line = new Line(romanToArabic(left), sim, romanToArabic(right));
+            try {
+                int leftInt = romanToArabic(left);
+                int rightInt = romanToArabic(right);
+                if (leftInt >= 0 && rightInt >= 0 && leftInt <= 10 && rightInt <= 10)
+                    line = new Line(leftInt, sim, rightInt, false);
+                else
+                    throw new IllegalStateException("Number is not included in the range: " + left + " " + right);
+            } catch (Exception ex) {
+                throw new IllegalStateException(ex.getMessage());
+            }
         }
         return line;
 
     }
 
-    private boolean isNum(String str) {
+    public boolean isNum(String str) {
         if (str == null || str.isEmpty()) return false;
         for (int i = 0; i < str.length(); i++) {
             if (!Character.isDigit(str.charAt(i))) return false;

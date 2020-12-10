@@ -15,6 +15,9 @@ public class Main {
         Line result = parser.parseString(textIn);
 
         // Считаем и выводим резльтат
-        System.out.println(math.calc(result.getFirst(), result.getZnak(), result.getSecond()));
+        if (result.isArabic())
+            System.out.println(math.calc(result.getFirst(), result.getZnak(), result.getSecond()));
+        else
+            System.out.println(parser.arabicToRoman(math.calc(result.getFirst(), result.getZnak(), result.getSecond())));
     }
 }
