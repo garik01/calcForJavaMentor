@@ -1,10 +1,12 @@
 package com.company;
 
-final class Line {
+class Line {
 
     private int first;
     private int second;
     private char znak;
+
+    Line() { }
 
     Line(int first, char znak, int second) {
         this.first = first;
