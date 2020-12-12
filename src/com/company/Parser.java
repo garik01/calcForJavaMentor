@@ -5,7 +5,6 @@ import java.util.List;
 public final class Parser {
 
     public final Line parseString(String str) {
-
         String left = "", right = "";
         char sim;
 
@@ -38,9 +37,9 @@ public final class Parser {
             }
             catch (Exception ex) {
                 throw new IllegalStateException(ex.getMessage());
-
             }
-        } else {
+        }
+        else {
             try {
                 int leftInt = romanToArabic(left);
                 int rightInt = romanToArabic(right);
@@ -53,7 +52,6 @@ public final class Parser {
             }
         }
         return line;
-
     }
 
     public boolean isNum(String str) {
@@ -94,13 +92,13 @@ public final class Parser {
             throw new IllegalArgumentException(number + " is not in range (0,4000]");
         }
 
-        List<RomanNum> romanNumerals = RomanNum.getReverseSortedValues();
+        List<RomanNum> romanNum = RomanNum.getReverseSortedValues();
 
         int i = 0;
         StringBuilder sb = new StringBuilder();
 
-        while ((number > 0) && (i < romanNumerals.size())) {
-            RomanNum currentSymbol = romanNumerals.get(i);
+        while ((number > 0) && (i < romanNum.size())) {
+            RomanNum currentSymbol = romanNum.get(i);
             if (currentSymbol.getValue() <= number) {
                 sb.append(currentSymbol.name());
                 number -= currentSymbol.getValue();

@@ -2,6 +2,7 @@ package com.company;
 
 public final class Math {
 
+    // Определяем знак
     public int calc(int a, char b, int c) {
         switch (b) {
             case ('+'):
@@ -34,7 +35,7 @@ public final class Math {
             return a / b;
         }
         else
-            return -1;
+            throw new IllegalStateException("Division by zero is prohibited");
     }
 
 }

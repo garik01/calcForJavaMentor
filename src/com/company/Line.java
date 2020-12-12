@@ -1,13 +1,18 @@
 package com.company;
 
+/*
+
+    Класс хранит данные
+    обработанной строки.
+
+ */
+
 class Line {
 
     private int first;
     private int second;
     private char znak;
     private boolean isArabic;
-
-    Line() { }
 
     Line(int first, char znak, int second) {
         this.first = first;
