@@ -20,4 +20,5 @@ public class Main {
         else
             System.out.println(parser.arabicToRoman(math.calc(result.getFirst(), result.getZnak(), result.getSecond())));
     }
+
 }

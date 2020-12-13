@@ -31,7 +31,7 @@ public final class Math {
     }
 
     private int div(int a, int b) {
-        if (b > 0) {
+        if (b != 0) {
             return a / b;
         }
         else

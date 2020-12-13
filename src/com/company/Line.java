@@ -59,4 +59,5 @@ class Line {
     public void setArabic(boolean arabic) {
         isArabic = arabic;
     }
+
 }

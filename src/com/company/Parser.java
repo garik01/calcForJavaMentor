@@ -1,37 +1,21 @@
 package com.company;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 public final class Parser {
 
     public final Line parseString(String str) {
-        String left = "", right = "";
-        char sim;
-
-        int i = 0;
-        for (; i <= str.length(); i++) {
-
-            if (str.charAt(i) != ' ') {
-                left += str.charAt(i);
-            }
-            else {
-                i++;
-                break;
-            }
-        }
-        sim = str.charAt(i);
-        i = i + 2;
-        for (; i < str.length(); i++) {
-            right = right + str.charAt(i);
-        }
+        Pattern p = Pattern.compile(" ");
+        String[] equation = p.split(str);
 
         Line line;
-        if (isNum(left) && isNum(right)) {
+        if (isNum(equation[0]) && isNum(equation[2])) {
             try {
-                int leftInt = Integer.valueOf(left);
-                int rightInt = Integer.valueOf(right);
+                int leftInt = Integer.valueOf(equation[0]);
+                int rightInt = Integer.valueOf(equation[2]);
                 if (leftInt >= 0 && rightInt >= 0 && leftInt <= 10 && rightInt <= 10)
-                    line = new Line(leftInt, sim, rightInt);
+                    line = new Line(leftInt, equation[1].charAt(0), rightInt);
                 else
                     throw new IllegalStateException("Number is not included in the range: " + leftInt + " " + rightInt);
             }
@@ -41,12 +25,12 @@ public final class Parser {
         }
         else {
             try {
-                int leftInt = romanToArabic(left);
-                int rightInt = romanToArabic(right);
+                int leftInt = romanToArabic(equation[0]);
+                int rightInt = romanToArabic(equation[2]);
                 if (leftInt >= 0 && rightInt >= 0 && leftInt <= 10 && rightInt <= 10)
-                    line = new Line(leftInt, sim, rightInt, false);
+                    line = new Line(leftInt, equation[1].charAt(0), rightInt, false);
                 else
-                    throw new IllegalStateException("Number is not included in the range: " + left + " " + right);
+                    throw new IllegalStateException("Number is not included in the range: " + equation[0] + " " + equation[2]);
             } catch (Exception ex) {
                 throw new IllegalStateException(ex.getMessage());
             }
@@ -54,7 +38,7 @@ public final class Parser {
         return line;
     }
 
-    public boolean isNum(String str) {
+    public final boolean isNum(String str) {
         if (str == null || str.isEmpty()) return false;
         for (int i = 0; i < str.length(); i++) {
             if (!Character.isDigit(str.charAt(i))) return false;
@@ -62,7 +46,7 @@ public final class Parser {
         return true;
     }
 
-    public int romanToArabic(String str) {
+    public final int romanToArabic(String str) {
         String romanNumeral = str.toUpperCase();
         int result = 0;
 
@@ -87,7 +71,7 @@ public final class Parser {
         return result;
     }
 
-    public String arabicToRoman(int number) {
+    public final String arabicToRoman(int number) {
         if ((number <= 0) || (number > 4000)) {
             throw new IllegalArgumentException(number + " is not in range (0,4000]");
         }
